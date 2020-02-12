@@ -24,10 +24,11 @@ class App extends React.Component {
     this.setState( { todos: [...this.state.todos.filter((todo) => todo.id !== id)]})
   }
   //Add New Todo
-  addTodo = (title) => {
+  addTodo = (title, dueDate) => {
     const newTodo = {
       id: uuid.v4(),
       title: title,
+      dueDate: dueDate,
       completed: false
     }
     this.setState( { todos: [...this.state.todos, newTodo]})

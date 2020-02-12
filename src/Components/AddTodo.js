@@ -3,12 +3,13 @@ import React, { Component } from 'react'
 export class AddTodo extends Component {
     state = {
         title: '',
+        dueDate: '',
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addTodo(this.state.title);
-        this.setState({title: ''})
+        this.props.addTodo(this.state.title, this.state.dueDate);
+        this.setState({title: '', dueDate: ''})
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value});
@@ -19,8 +20,16 @@ export class AddTodo extends Component {
                     type="text" 
                     name="title" 
                     style={{flex: '10', padding: '5px'}} 
-                    placeholder="Add Todo ..." 
+                    placeholder="Add To-Do ..." 
                     value={this.state.title} 
+                    onChange={this.onChange}
+                />
+                <input 
+                    type="text" 
+                    name="dueDate" 
+                    style={{flex: '10', padding: '5px'}} 
+                    placeholder="Add Due Date ..." 
+                    value={this.state.dueDate} 
                     onChange={this.onChange}
                 />
                 <input 

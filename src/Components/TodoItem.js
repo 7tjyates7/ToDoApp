@@ -5,21 +5,40 @@ export class TodoItem extends Component {
     getStyle = () => {
         return {
             backgroundColor: this.props.todo.completed ?
-            'green' : 'red',
+            'lightgreen' : 'white',
             padding: '10px',
-            borderBottom: '1px #ccc dotted',
+            borderBottom: '1px #ccc solid',
             textDecoration: this.props.todo.completed ? 
             'line-through' : 'none'
         }
+    }
+    todaysDate = () => {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy; 
+        return today
     }
 
     render() {
         return (
             <div style={this.getStyle()}>
                 <p>
-                    <input type="checkbox" onChange={this.props.markComplete.bind(this, this.props.todo.id)} /> {' '}
-                    {this.props.todo.title}
-                    <button onClick={this.props.delTodo.bind(this,this.props.todo.id)} style={btnstyle}>Delete</button>
+                    <input 
+                        type="checkbox" 
+                        onChange={this.props.markComplete.bind(this, this.props.todo.id)} 
+                    /> 
+                    {' '} {this.props.todo.title} 
+                    {' '}| Due Date: {this.props.todo.dueDate}
+                    {' '}| Current Date: {this.todaysDate()}
+                    <button 
+                        onClick={this.props.delTodo.bind(this,this.props.todo.id)} 
+                        style={btnstyle}
+                    >
+                        Delete
+                    </button>
                 </p>
             </div>
         )
@@ -32,7 +51,7 @@ TodoItem.propTypes = {
 }
 const btnstyle = {
     background: 'grey',
-    color: 'black',
+    color: 'white',
     border: 'none',
     padding: '5px 10px',
     borderRadius: '50%',
